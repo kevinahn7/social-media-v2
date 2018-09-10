@@ -11,10 +11,15 @@ class AboutControl extends React.Component {
       aboutDetails: 'Details about myself',
       aboutVisible: true
     };
-    this.handleShowEdit = this.handleShowEdit.bind(this);
+    this.handleFormToggle = this.handleFormToggle.bind(this);
+    this.handleUpdateDetails = this.handleUpdateDetails.bind(this);
   }
-  handleShowEdit = () => {
-    this.setState(() => ({ aboutVisible: false }));
+  handleFormToggle = () => {
+    this.setState((prevState) => ({ aboutVisible: !prevState.aboutVisible }));
+  }
+  handleUpdateDetails = (newDetails) => {
+    this.setState(() => ({ aboutDetails: newDetails }));
+    this.handleFormToggle();
   }
   render() {
     const cardStyle = {
@@ -29,9 +34,12 @@ class AboutControl extends React.Component {
               this.state.aboutVisible ?
               <AboutContent
                 details={this.state.aboutDetails}
-                handleShowEdit={this.handleShowEdit}
+                handleFormToggle={this.handleFormToggle}
               /> :
-              <AboutEditForm />
+              <AboutEditForm
+                details={this.state.aboutDetails}
+                handleUpdateDetails={this.handleUpdateDetails}
+              />
             }
           </CardContent>
         </Card>

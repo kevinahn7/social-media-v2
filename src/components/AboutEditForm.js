@@ -1,11 +1,17 @@
 import React from 'react';
 
-const AboutEditForm = () => {
+const AboutEditForm = (props) => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const details = e.target.elements.details.value.trim();
+    props.handleUpdateDetails(details);
+  }
   return(
     <div>
-      <form>
-        <input type='text' name='details' /><br/>
-        <button type='submit'>Edit</button>
+      <form onSubmit={handleFormSubmit}>
+        <input type='text' name='details' defaultValue={props.details}/><br/>
+        <button type='submit'>Update</button>
       </form>
     </div>
   );

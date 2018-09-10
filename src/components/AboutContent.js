@@ -4,7 +4,7 @@ const AboutContent = (props) => {
   return(
     <div>
       <p>{props.details}</p>
-      <button onClick={props.handleShowEdit}>Edit</button>
+      <button onClick={props.handleFormToggle}>Edit</button>
     </div>
   );
 }
