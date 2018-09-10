@@ -1,12 +1,12 @@
 import React from 'react';
-import About from './About';
+import AboutControl from './AboutControl';
 import Details from './Details';
 
 const Profile = () => {
   return(
     <div>
       <Details />
-      <About />
+      <AboutControl />
     </div>
   );
 }

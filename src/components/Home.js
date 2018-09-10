@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
+import Feed from './Feed';
 
 const Home = () => {
   const gridContainer = {
@@ -16,7 +17,7 @@ const Home = () => {
         <Profile />
       </div>
       <div style={gridItem}>
-        <h1>Another hello</h1>
+        <Feed />
       </div>
     </div>
   );
