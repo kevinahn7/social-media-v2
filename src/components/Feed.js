@@ -13,6 +13,7 @@ class Feed extends React.Component {
     }
     this.handleAddingNewPostToList = this.handleAddingNewPostToList.bind(this);
   };
+  
   handleAddingNewPostToList = (e) => {
     e.preventDefault();
     const newPostText = e.target.elements.postText.value.trim();
