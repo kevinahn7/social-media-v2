@@ -48,7 +48,7 @@ class Feed extends React.Component {
   sortListByLikes = () => {
     let newMasterPostList = this.state.masterPostList;
     newMasterPostList.sort(function(a,b) {
-      return (a.likes < b.likes) ? 1 : ((b.likes < a.likes) ? -1 : 0);
+      return (a.likes-a.dislikes < b.likes-b.dislikes) ? 1 : ((b.likes-b.dislikes < a.likes-a.dislikes) ? -1 : 0);
     });
   }
 
