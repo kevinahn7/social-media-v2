@@ -27,6 +27,7 @@ class Feed extends React.Component {
         id: v4()
       }
     );
+    this.sortListByLikes(newMasterPostList);
     this.setState({masterPostList: newMasterPostList});
     e.target.elements.postText.value = '';
   }
@@ -35,19 +36,18 @@ class Feed extends React.Component {
     let newMasterPostList = this.state.masterPostList;
     newMasterPostList[index].likes = (newMasterPostList[index].likes+1);
     this.setState({masterPostList: newMasterPostList});
-    this.sortListByLikes();
+    this.sortListByLikes(this.state.masterPostList);
   }
 
   handleDislike = (post, index) => {
     let newMasterPostList = this.state.masterPostList;
     newMasterPostList[index].dislikes = (newMasterPostList[index].dislikes+1);
     this.setState({masterPostList: newMasterPostList});
-    this.sortListByLikes();
+    this.sortListByLikes(this.state.masterPostList);
   }
 
-  sortListByLikes = () => {
-    let newMasterPostList = this.state.masterPostList;
-    newMasterPostList.sort(function(a,b) {
+  sortListByLikes = (list) => {
+    list.sort(function(a,b) {
       return (a.likes-a.dislikes < b.likes-b.dislikes) ? 1 : ((b.likes-b.dislikes < a.likes-a.dislikes) ? -1 : 0);
     });
   }
