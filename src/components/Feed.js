@@ -13,8 +13,6 @@ class Feed extends React.Component {
     }
     this.handleAddingNewPostToList = this.handleAddingNewPostToList.bind(this);
   };
-
-
   handleAddingNewPostToList = (e) => {
     e.preventDefault();
     const newPostText = e.target.elements.postText.value.trim();
@@ -24,12 +22,34 @@ class Feed extends React.Component {
         postText: newPostText,
         author: this.state.author,
         timestamp: new Date().toString(),
+        likes: 0,
+        dislikes: 0,
         id: v4()
       }
     );
     this.setState({masterPostList: newMasterPostList});
-    console.log(newMasterPostList);
     e.target.elements.postText.value = '';
+  }
+
+  handleLike = (post, index) => {
+    let newMasterPostList = this.state.masterPostList;
+    newMasterPostList[index].likes = (newMasterPostList[index].likes+1);
+    this.setState({masterPostList: newMasterPostList});
+    this.sortListByLikes();
+  }
+
+  handleDislike = (post, index) => {
+    let newMasterPostList = this.state.masterPostList;
+    newMasterPostList[index].dislikes = (newMasterPostList[index].dislikes+1);
+    this.setState({masterPostList: newMasterPostList});
+    this.sortListByLikes();
+  }
+
+  sortListByLikes = () => {
+    let newMasterPostList = this.state.masterPostList;
+    newMasterPostList.sort(function(a,b) {
+      return (a.likes < b.likes) ? 1 : ((b.likes < a.likes) ? -1 : 0);
+    });
   }
 
   render() {
@@ -45,12 +65,17 @@ class Feed extends React.Component {
               </form>
             </div>
             <div id='feedList'>
-              {this.state.masterPostList.map((post) =>
+              {this.state.masterPostList.map((post, index) =>
                 <Post
                   postText={post.postText}
                   author={post.author}
                   timestamp={post.timestamp}
+                  likes={post.likes}
+                  dislikes={post.dislikes}
                   key={post.id}
+                  handleLike={this.handleLike}
+                  handleDislike={this.handleDislike}
+                  index={index}
                 />
               )}
             </div>
